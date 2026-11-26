@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pista Aberta · Fórmula 1 em português de Portugal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap">
+<style>
+:root{
+  --bg:#EEF1F3; --panel:#FFFFFF; --ink:#1B2127; --muted:#56626C; --line:#CBD3D9; --accent:#C8102E; --accent-ink:#FFFFFF; --soft:#E2E7EB;
+  color-scheme: light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#12171B; --panel:#1A2026; --ink:#E8ECEF; --muted:#9AA6AF; --line:#2B343B; --accent:#FF4A5F; --accent-ink:#12171B; --soft:#222A31;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#12171B; --panel:#1A2026; --ink:#E8ECEF; --muted:#9AA6AF; --line:#2B343B; --accent:#FF4A5F; --accent-ink:#12171B; --soft:#222A31;
+  color-scheme: dark;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Barlow",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;font-size:17px;line-height:1.55}
+.wrap{max-width:980px;margin:0 auto;padding:0 20px}
+header.top{padding:22px 0 14px}
+.brand{font-family:"Barlow Condensed","Arial Narrow",Impact,sans-serif;font-weight:700;font-size:28px;letter-spacing:.01em;margin:0}
+.brand small{display:block;font-family:"Barlow",system-ui,sans-serif;font-weight:500;font-size:15px;color:var(--muted);letter-spacing:0}
+.kerb{height:12px;background:repeating-linear-gradient(90deg,var(--accent) 0 28px,var(--panel) 28px 56px);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.hero{padding:34px 0 26px}
+.hero h2{font-family:"Barlow Condensed","Arial Narrow",Impact,sans-serif;font-weight:700;font-size:clamp(34px,7vw,64px);line-height:1.02;margin:0 0 4px}
+.hero p.sub{margin:0 0 22px;color:var(--muted)}
+.count{display:flex;gap:10px;flex-wrap:wrap}
+.cell{background:var(--panel);border:1px solid var(--line);border-radius:6px;min-width:86px;padding:10px 14px 8px}
+.cell b{display:block;font-family:"Barlow Condensed","Arial Narrow",Impact,sans-serif;font-weight:700;font-size:clamp(38px,9vw,60px);line-height:1;font-variant-numeric:tabular-nums}
+.cell span{font-size:14px;color:var(--muted)}
+.live{display:inline-block;background:var(--accent);color:var(--accent-ink);font-weight:600;padding:6px 12px;border-radius:4px}
+h3{font-family:"Barlow Condensed","Arial Narrow",Impact,sans-serif;font-weight:700;font-size:30px;margin:0 0 4px}
+section{padding:26px 0}
+.note{color:var(--muted);font-size:15px;margin:0 0 14px}
+.gp{background:var(--panel);border:1px solid var(--line);border-radius:6px;margin:0 0 18px;overflow:hidden}
+.gp-head{padding:14px 18px;border-bottom:1px solid var(--line)}
+.gp-head h4{font-family:"Barlow Condensed","Arial Narrow",Impact,sans-serif;font-weight:700;font-size:24px;margin:0}
+.gp-head span{color:var(--muted);font-size:15px}
+.tbl{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:460px}
+th,td{text-align:left;padding:10px 18px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
+tr:last-child td{border-bottom:0}
+th{font-weight:600;color:var(--muted);font-size:15px}
+tr.past td{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--line)}
+tr.next td{background:var(--soft);font-weight:600}
+tr.race td:first-child{border-left:4px solid var(--accent)}
+.tag{display:inline-block;font-size:13px;border:1px solid var(--line);border-radius:3px;padding:0 6px;margin-left:8px;color:var(--muted);font-weight:500}
+.news{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.news li{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:14px 18px}
+.news a{color:var(--ink);font-weight:600;text-decoration:underline;text-decoration-color:var(--accent);text-underline-offset:3px}
+.news a:focus-visible,.news a:hover{color:var(--accent)}
+.news p{margin:4px 0 0;color:var(--muted);font-size:15.5px}
+.next-season{display:flex;gap:18px;align-items:baseline;flex-wrap:wrap;background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:6px;padding:16px 18px}
+.next-season b{font-family:"Barlow Condensed","Arial Narrow",Impact,sans-serif;font-size:26px}
+footer{padding:24px 0 36px;color:var(--muted);font-size:15px;border-top:1px solid var(--line)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <h1 class="brand">Pista Aberta<small>Fórmula 1 em português de Portugal</small></h1>
+</div></header>
+<div class="kerb" aria-hidden="true"></div>
+
+<main class="wrap">
+  <div class="hero" aria-live="polite">
+    <h2 id="next-title">A procurar a próxima sessão…</h2>
+    <p class="sub" id="next-sub"></p>
+    <div class="count" id="count"></div>
+  </div>
+
+  <section id="calendario">
+    <h3>Fins de semana de corrida</h3>
+    <p class="note">Horas de Lisboa (WET). Transmissão em Portugal: DAZN.</p>
+    <div id="weekends"></div>
+  </section>
+
+  <section id="noticias">
+    <h3>Notícias</h3>
+    <p class="note">Recolhidas automaticamente de feeds RSS, com ligação às fontes.</p>
+    <ul class="news" id="news"></ul>
+  </section>
+
+  <section>
+    <div class="next-season">
+      <b>Grande Prémio de Portugal 2027</b>
+      <span>18 a 20 de junho de 2027</span>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap">Os horários mostrados com a etiqueta “a confirmar” ainda não têm confirmação oficial cruzada. Site não oficial, sem ligação à Fórmula 1.</div></footer>
+
+<script>
+Promise.all([
+  fetch("data/weekends.json").then(function(r){ return r.json(); }),
+  fetch("data/news.json").then(function(r){ return r.json(); })
+]).then(function(res){
+var WEEKENDS = res[0], NEWS = res[1];
+
+var fmtDay = new Intl.DateTimeFormat("pt-PT", { timeZone: "Europe/Lisbon", weekday: "long", day: "numeric", month: "long" });
+var fmtHour = new Intl.DateTimeFormat("pt-PT", { timeZone: "Europe/Lisbon", hour: "2-digit", minute: "2-digit", hour12: false });
+function cap(s){ return s.charAt(0).toUpperCase() + s.slice(1); }
+
+var all = [];
+WEEKENDS.forEach(function(w){ w.sessions.forEach(function(s){
+  all.push({ gp: w.gp, n: s.n, start: s.t ? Date.parse(s.t) : null, end: s.t ? Date.parse(s.t) + s.d * 60000 : null, el: null });
+  s.ref = all[all.length - 1];
+}); });
+
+function el(tag, cls, text){ var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+
+var box = document.getElementById("weekends");
+WEEKENDS.forEach(function(w){
+  var card = el("div", "gp");
+  var head = el("div", "gp-head");
+  head.appendChild(el("h4", null, w.gp));
+  head.appendChild(el("span", null, w.circuit + " · " + w.dates));
+  card.appendChild(head);
+  var wrap = el("div", "tbl"), t = el("table");
+  var hr = el("tr");
+  ["Sessão", "Dia", "Hora"].forEach(function(h){ hr.appendChild(el("th", null, h)); });
+  t.appendChild(hr);
+  w.sessions.forEach(function(s){
+    var tr = el("tr", s.race ? "race" : "");
+    var c1 = el("td", null, s.n);
+    if (s.v) c1.appendChild(el("span", "tag", "a confirmar"));
+    tr.appendChild(c1);
+    tr.appendChild(el("td", null, s.t ? cap(fmtDay.format(new Date(s.t))) : "—"));
+    tr.appendChild(el("td", null, s.t ? fmtHour.format(new Date(s.t)) : "hora a confirmar"));
+    s.ref.el = tr;
+    t.appendChild(tr);
+  });
+  wrap.appendChild(t); card.appendChild(wrap); box.appendChild(card);
+});
+
+var nl = document.getElementById("news");
+NEWS.forEach(function(n){
+  var li = el("li"), a = el("a", null, n.t);
+  if (/^https:\/\//.test(n.u)) { a.href = n.u; a.target = "_blank"; a.rel = "noopener"; }
+  li.appendChild(a); li.appendChild(el("p", null, n.s)); nl.appendChild(li);
+});
+
+var title = document.getElementById("next-title"), sub = document.getElementById("next-sub"), count = document.getElementById("count");
+function cell(v, l){ var c = el("div", "cell"); c.appendChild(el("b", null, String(v).padStart(2, "0"))); c.appendChild(el("span", null, l)); return c; }
+
+function tick(){
+  var now = Date.now(), next = null, live = null;
+  all.forEach(function(s){
+    if (!s.start) return;
+    if (now >= s.end) { if (s.el) s.el.className = (s.el.className.replace(/ ?(past|next)/g, "") + " past").trim(); }
+    else if (now >= s.start) live = s;
+    else if (!next) next = s;
+  });
+  all.forEach(function(s){ if (s.el && s === next) s.el.className = (s.el.className.replace(/ ?next/g, "") + " next").trim(); });
+  count.textContent = "";
+  if (live) {
+    title.textContent = live.n + " a decorrer";
+    sub.textContent = live.gp;
+    var b = el("span", "live", "Em pista agora"); count.appendChild(b);
+  } else if (next) {
+    var ms = next.start - now, d = Math.floor(ms / 864e5), h = Math.floor(ms % 864e5 / 36e5), m = Math.floor(ms % 36e5 / 6e4), s2 = Math.floor(ms % 6e4 / 1e3);
+    title.textContent = next.n + " · " + next.gp;
+    sub.textContent = cap(fmtDay.format(new Date(next.start))) + ", às " + fmtHour.format(new Date(next.start)) + " (hora de Lisboa)";
+    count.appendChild(cell(d, "dias")); count.appendChild(cell(h, "horas")); count.appendChild(cell(m, "minutos")); count.appendChild(cell(s2, "segundos"));
+  } else {
+    title.textContent = "Época 2026 concluída";
+    sub.textContent = "Volta quando houver novas sessões no calendário.";
+  }
+}
+tick(); setInterval(tick, 1000);
+}).catch(function(){ document.getElementById("next-title").textContent = "Não foi possível carregar os dados. Abre o site através de um servidor (ver README)."; });
+</script>
+</body>
+</html>

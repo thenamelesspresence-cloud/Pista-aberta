@@ -1,0 +1,73 @@
+[
+  {
+    "gp": "Grande Prémio do Catar",
+    "circuit": "Circuito de Losail",
+    "dates": "27 a 29 de novembro",
+    "sessions": [
+      {
+        "n": "Treino Livre 1",
+        "t": "2026-11-27T13:00:00Z",
+        "d": 60,
+        "v": 1
+      },
+      {
+        "n": "Treino Livre 2",
+        "t": "2026-11-27T17:00:00Z",
+        "d": 60,
+        "v": 1
+      },
+      {
+        "n": "Treino Livre 3",
+        "t": "2026-11-28T14:30:00Z",
+        "d": 60,
+        "v": 1
+      },
+      {
+        "n": "Qualificação",
+        "t": "2026-11-28T18:00:00Z",
+        "d": 60,
+        "v": 1
+      },
+      {
+        "n": "Corrida",
+        "t": null,
+        "d": 120,
+        "race": 1
+      }
+    ]
+  },
+  {
+    "gp": "Grande Prémio de Abu Dhabi",
+    "circuit": "Circuito de Yas Marina · final da época",
+    "dates": "4 a 6 de dezembro",
+    "sessions": [
+      {
+        "n": "Treino Livre 1",
+        "t": "2026-12-04T09:30:00Z",
+        "d": 60
+      },
+      {
+        "n": "Treino Livre 2",
+        "t": "2026-12-04T13:00:00Z",
+        "d": 60,
+        "v": 1
+      },
+      {
+        "n": "Treino Livre 3",
+        "t": "2026-12-05T10:30:00Z",
+        "d": 60
+      },
+      {
+        "n": "Qualificação",
+        "t": "2026-12-05T14:00:00Z",
+        "d": 60
+      },
+      {
+        "n": "Corrida",
+        "t": "2026-12-06T13:00:00Z",
+        "d": 120,
+        "race": 1
+      }
+    ]
+  }
+]
