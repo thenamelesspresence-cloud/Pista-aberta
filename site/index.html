@@ -1,126 +1,307 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-PT">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pista Aberta | Fórmula 1 em Português</title>
-    <link rel="stylesheet" href="estilo.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pista Aberta · Fórmula 1 em português de Portugal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&display=swap">
+<style>
+:root{
+  --team:#E10600; --bg:#0B0D10; --panel:#14181D; --panel2:#1B2128; --ink:#F2F4F6; --muted:#9AA4AE; --line:#262E36;
+  color-scheme:dark;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+html{scroll-padding-top:90px;scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Archivo",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;font-size:17px;line-height:1.5}
+.wrap{max-width:1140px;margin:0 auto;padding:0 22px}
+.disp{font-style:italic;font-weight:800;font-stretch:125%;text-transform:uppercase;letter-spacing:-.01em;line-height:.98;margin:0}
+
+/* navegação */
+.nav{position:sticky;top:0;z-index:20;background:rgba(11,13,16,.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{font-size:21px;display:flex;align-items:center;gap:10px;color:var(--ink);text-decoration:none}
+.logo i{display:inline-block;width:26px;height:14px;background:var(--team);transform:skewX(-24deg)}
+.nav ul{display:flex;gap:26px;list-style:none;margin:0;padding:0}
+.nav a.l{color:var(--muted);text-decoration:none;font-size:14px;font-weight:600;text-transform:uppercase;letter-spacing:.08em}
+.nav a.l:hover,.nav a.l:focus-visible{color:var(--ink)}
+@media(max-width:700px){.nav ul{display:none}}
+
+/* herói */
+.hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+.hero-bg{position:absolute;inset:0;background:
+  linear-gradient(90deg,var(--bg) 18%,rgba(11,13,16,.35) 100%),
+  url(img/hero.jpg) center/cover no-repeat,
+  repeating-linear-gradient(45deg,rgba(255,255,255,.03) 0 2px,transparent 2px 7px)}
+.hero-bg::after{content:"";position:absolute;top:0;bottom:0;right:0;width:62%;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--team) 34%,transparent),color-mix(in srgb,var(--team) 6%,transparent));
+  clip-path:polygon(32% 0,100% 0,100% 100%,0 100%)}
+.tem-foto .hero-bg::after{opacity:.35}
+.hero-in{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:10px;align-items:center;padding-top:54px;padding-bottom:46px;min-height:460px}
+.kicker{display:inline-flex;align-items:center;gap:10px;margin:0 0 14px;font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.kicker::before{content:"";width:34px;height:4px;background:var(--team);transform:skewX(-24deg)}
+#next-title{font-size:clamp(32px,5.4vw,62px)}
+.gpname{margin:12px 0 0;font-size:clamp(18px,2.4vw,26px);font-weight:700;font-style:italic;font-stretch:112%;color:var(--team);text-transform:uppercase}
+.sub{margin:6px 0 26px;color:var(--muted)}
+.count{display:flex;gap:10px;flex-wrap:wrap}
+.cell{background:rgba(20,24,29,.86);border:1px solid var(--line);border-top:3px solid var(--team);min-width:92px;padding:10px 14px 8px;clip-path:polygon(0 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%)}
+.cell b{display:block;font-size:clamp(34px,6vw,54px);font-weight:800;font-stretch:125%;font-style:italic;line-height:1;font-variant-numeric:tabular-nums}
+.cell span{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.livebadge{display:inline-block;background:var(--team);color:#fff;font-weight:800;font-style:italic;font-stretch:125%;text-transform:uppercase;padding:10px 22px;clip-path:polygon(14px 0,100% 0,calc(100% - 14px) 100%,0 100%)}
+.car svg{width:100%;height:auto;display:block;filter:drop-shadow(0 18px 24px rgba(0,0,0,.55))}
+.tem-foto .car{display:none}
+@media(max-width:860px){.hero-in{grid-template-columns:1fr;padding-top:36px;min-height:0}.car{order:-1;max-width:520px}}
+
+/* secções */
+section{padding:62px 0 8px}
+.sec-h{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;margin:0 0 22px}
+.sec-h h2{font-size:clamp(26px,4vw,40px)}
+.sec-h p{margin:0;color:var(--muted);font-size:14px}
+
+/* calendário */
+.gp{background:var(--panel);border:1px solid var(--line);margin:0 0 22px}
+.gp-head{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;flex-wrap:wrap;padding:20px 22px 16px;border-bottom:1px solid var(--line);background:linear-gradient(90deg,color-mix(in srgb,var(--team) 16%,transparent),transparent 60%)}
+.gp-head h3{font-size:clamp(22px,3.2vw,30px)}
+.gp-head span{color:var(--muted);font-size:14px}
+.row{display:grid;grid-template-columns:62px 1fr auto;align-items:center;gap:16px;padding:13px 22px 13px 0;border-bottom:1px solid var(--line)}
+.row:last-child{border-bottom:0}
+.cd{justify-self:stretch;align-self:stretch;display:flex;align-items:center;justify-content:center;margin:-13px 0;font-weight:800;font-style:italic;font-stretch:125%;font-size:15px;background:var(--panel2);color:var(--muted)}
+.row.race .cd{background:var(--team);color:#fff}
+.nm{font-weight:600}
+.tag{margin-left:8px;font-size:11px;border:1px solid var(--line);padding:1px 7px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;white-space:nowrap}
+.pill{margin-left:10px;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;background:var(--team);color:#fff;padding:2px 9px}
+.pill:empty{display:none}
+.when{text-align:right;font-variant-numeric:tabular-nums}
+.when b{display:block;font-size:20px;font-weight:800;font-stretch:112%}
+.when span{font-size:13px;color:var(--muted)}
+.row.past{opacity:.42}
+.row.next,.row.live{background:linear-gradient(90deg,color-mix(in srgb,var(--team) 22%,transparent),transparent 75%)}
+.row.next .cd,.row.live .cd{background:var(--team);color:#fff}
+
+/* equipas */
+.teams{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}
+.team{position:relative;overflow:hidden;min-height:150px;background:var(--panel);border:1px solid var(--line);padding:16px 16px 14px;display:flex;flex-direction:column;justify-content:flex-end;transition:transform .2s,border-color .2s}
+.team::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--c)}
+.team .img{position:absolute;inset:0;background-size:cover;background-position:center;opacity:.5}
+.team .img::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,var(--panel) 12%,rgba(20,24,29,.1))}
+.team .n{position:absolute;right:12px;top:4px;font-size:64px;font-weight:900;font-style:italic;font-stretch:125%;color:var(--c);opacity:.22;line-height:1}
+.team .t{position:relative;font-size:19px;font-weight:800;font-style:italic;font-stretch:118%;text-transform:uppercase;line-height:1.05}
+.team:hover{transform:translateY(-4px);border-color:var(--c)}
+
+/* notícias */
+.news{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.news li{background:var(--panel);border:1px solid var(--line);border-top:3px solid var(--line);transition:border-color .2s}
+.news li:hover{border-top-color:var(--team)}
+.news li:first-child{grid-column:1/-1;border-top:3px solid var(--team);background:linear-gradient(120deg,color-mix(in srgb,var(--team) 14%,var(--panel)),var(--panel) 70%)}
+.news a{display:block;height:100%;padding:20px 22px;color:var(--ink);text-decoration:none}
+.news .tt{font-size:19px;font-weight:700;line-height:1.25}
+.news li:first-child .tt{font-size:clamp(24px,3.6vw,38px);font-style:italic;font-weight:800;font-stretch:118%;text-transform:uppercase;line-height:1.05}
+.news .src{display:block;margin-top:12px;font-size:13px;color:var(--muted);letter-spacing:.04em}
+.news a:hover .tt,.news a:focus-visible .tt{color:var(--team)}
+
+/* destaque 2027 */
+.bandeira{display:flex;flex-wrap:wrap;gap:6px 22px;align-items:baseline;background:var(--team);color:#fff;padding:22px 26px;clip-path:polygon(0 0,100% 0,calc(100% - 26px) 100%,0 100%)}
+.bandeira b{font-size:clamp(20px,3vw,30px)}
+footer{margin-top:70px;padding:26px 0 40px;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo">🏎️ PISTA <span>ABERTA</span></a>
-            <div class="nav-links">
-                <a href="index.html" class="ativo">Início & Notícias</a>
-                <a href="pilotos.html">Equipas & Pilotos</a>
-                <a href="historico.html">Temporadas Passadas</a>
-            </div>
-        </div>
-    </nav>
+<header class="nav"><div class="wrap">
+  <a class="logo disp" href="#proxima"><i></i>Pista Aberta</a>
+  <ul>
+    <li><a class="l" href="#proxima">Próxima</a></li>
+    <li><a class="l" href="#calendario">Calendário</a></li>
+    <li><a class="l" href="#equipas">Equipas</a></li>
+    <li><a class="l" href="#noticias">Notícias</a></li>
+  </ul>
+</div></header>
 
-    <header class="hero">
-        <div class="hero-conteudo">
-            <span class="etiqueta-live">Próxima Sessão em Pista</span>
-            <h1 id="tituloProximo">Grande Prémio de Fórmula 1</h1>
-            <p id="subtituloProximo">A carregar horários oficiais (Hora de Lisboa)...</p>
-            
-            <div class="contador" id="contador">
-                <div class="caixa-tempo"><span id="dias">00</span><small>Dias</small></div>
-                <div class="caixa-tempo"><span id="horas">00</span><small>Horas</small></div>
-                <div class="caixa-tempo"><span id="minutos">00</span><small>Min</small></div>
-                <div class="caixa-tempo"><span id="segundos">00</span><small>Seg</small></div>
-            </div>
-        </div>
-    </header>
+<main>
+<div class="hero" id="proxima">
+  <div class="hero-bg"></div>
+  <div class="wrap hero-in">
+    <div aria-live="polite">
+      <p class="kicker" id="kicker">Próxima sessão</p>
+      <h1 class="disp" id="next-title">A carregar…</h1>
+      <p class="gpname" id="next-gp"></p>
+      <p class="sub" id="next-sub"></p>
+      <div class="count" id="count"></div>
+    </div>
+    <div class="car" aria-hidden="true">
+      <svg viewBox="0 0 900 280">
+        <defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2b333c"/><stop offset="1" stop-color="#0e1115"/></linearGradient></defs>
+        <g stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-opacity=".16">
+          <line x1="760" y1="40" x2="890" y2="40"/><line x1="800" y1="100" x2="900" y2="100"/><line x1="770" y1="160" x2="890" y2="160"/><line x1="720" y1="230" x2="860" y2="230"/>
+        </g>
+        <ellipse cx="450" cy="262" rx="420" ry="9" fill="#000" opacity=".5"/>
+        <rect x="788" y="64" width="88" height="12" rx="3" fill="url(#g)"/>
+        <rect x="798" y="76" width="9" height="62" fill="#0e1115"/>
+        <rect x="868" y="56" width="8" height="44" fill="var(--team)"/>
+        <path d="M36 214 C120 206 200 198 290 182 L372 150 C420 134 470 128 520 126 L600 100 C645 94 700 102 752 128 L812 160 L800 196 L560 198 L330 208 L120 220 Z" fill="var(--team)"/>
+        <path d="M300 200 L560 192 L790 190 L784 206 L330 216 Z" fill="url(#g)"/>
+        <path d="M452 130 C470 108 520 104 548 120 L548 130 Z" fill="#0e1115"/>
+        <circle cx="505" cy="116" r="13" fill="#F2F4F6"/>
+        <path d="M468 128 Q505 90 550 118" fill="none" stroke="#9AA4AE" stroke-width="5" stroke-linecap="round"/>
+        <path d="M14 228 L252 214 L254 226 L22 242 Z" fill="url(#g)"/>
+        <rect x="12" y="224" width="8" height="20" fill="var(--team)"/>
+        <circle cx="215" cy="214" r="46" fill="#0b0d10" stroke="#2b333c" stroke-width="3"/><circle cx="215" cy="214" r="22" fill="#1b2128"/><circle cx="215" cy="214" r="7" fill="#9AA4AE"/>
+        <circle cx="690" cy="206" r="54" fill="#0b0d10" stroke="#2b333c" stroke-width="3"/><circle cx="690" cy="206" r="26" fill="#1b2128"/><circle cx="690" cy="206" r="8" fill="#9AA4AE"/>
+      </svg>
+    </div>
+  </div>
+</div>
 
-    <main class="container">
-        <h2 class="titulo-seccao">Fins de Semana de Corrida (Hora de Lisboa • DAZN)</h2>
-        <div id="grelhaCorridas" class="grelha" style="margin-bottom: 50px;"></div>
+<section id="calendario"><div class="wrap">
+  <div class="sec-h"><h2 class="disp">Calendário</h2><p>Horas de Lisboa · Transmissão em Portugal: DAZN</p></div>
+  <div id="weekends"></div>
+</div></section>
 
-        <h2 class="titulo-seccao">Últimas Notícias do Paddock</h2>
-        <div id="grelhaNoticias" class="grelha"></div>
-    </main>
+<section id="equipas"><div class="wrap">
+  <div class="sec-h"><h2 class="disp">Equipas</h2><p>A grelha de 2026</p></div>
+  <div class="teams" id="teams"></div>
+</div></section>
 
-    <script>
-        async function iniciarPortal() {
-            // 1. Carregar Calendário e Contagem Decrescente
-            try {
-                const resW = await fetch('data/weekends.json');
-                const dadosW = await resW.json();
-                const listaW = Array.isArray(dadosW) ? dadosW : (dadosW.weekends || []);
+<section id="noticias"><div class="wrap">
+  <div class="sec-h"><h2 class="disp">Notícias</h2><p>Recolhidas automaticamente de feeds RSS</p></div>
+  <ul class="news" id="news"></ul>
+</div></section>
 
-                const grelhaCorridas = document.getElementById('grelhaCorridas');
-                const agora = new Date();
-                let proximaSessao = null;
+<section><div class="wrap">
+  <div class="bandeira"><b class="disp">Grande Prémio de Portugal 2027</b><span>18 a 20 de junho de 2027</span></div>
+</div></section>
+</main>
 
-                listaW.slice(0, 3).forEach(gp => {
-                    const cartao = document.createElement('article');
-                    cartao.className = 'cartao';
+<footer><div class="wrap">Site não oficial, sem ligação à Fórmula 1 nem às equipas. Os nomes e as marcas pertencem aos respetivos proprietários. Horários com a etiqueta “a confirmar” ainda não têm confirmação oficial cruzada.</div></footer>
 
-                    const sessoes = gp.sessions || [];
-                    const htmlSessoes = sessoes.map(s => {
-                        const dataS = s.start ? new Date(s.start) : null;
-                        if (dataS && dataS > agora && !proximaSessao) {
-                            proximaSessao = { nome: `${s.name} • ${gp.name}`, data: dataS };
-                        }
-                        const horaTxt = dataS ? dataS.toLocaleTimeString('pt-PT', { hour: '2-digit', minute: '2-digit' }) : 'A confirmar';
-                        const diaTxt = dataS ? dataS.toLocaleDateString('pt-PT', { weekday: 'short', day: '2-digit', month: 'short' }) : '';
-                        return `<div class="linha-sessao"><span>${s.name}</span><span>${diaTxt} <strong>${horaTxt}</strong></span></div>`;
-                    }).join('');
+<script>
+var D = document;
+function $(i){ return D.getElementById(i); }
+function el(tag, cls, txt){ var e = D.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; }
+function cap(s){ return s.charAt(0).toUpperCase() + s.slice(1); }
+function json(u, fb){ return fetch(u).then(function(r){ if (!r.ok) throw 0; return r.json(); }).catch(function(){ return fb; }); }
+var TZ = "Europe/Lisbon";
+var fLong = new Intl.DateTimeFormat("pt-PT", { timeZone: TZ, weekday: "long", day: "numeric", month: "long" });
+var fShort = new Intl.DateTimeFormat("pt-PT", { timeZone: TZ, weekday: "short", day: "numeric", month: "short" });
+var fHour = new Intl.DateTimeFormat("pt-PT", { timeZone: TZ, hour: "2-digit", minute: "2-digit", hour12: false });
+var HEX = /^#[0-9a-f]{3,8}$/i;
 
-                    cartao.innerHTML = `
-                        <div class="faixa-equipa" style="background: var(--vermelho-f1);"></div>
-                        <div class="cartao-corpo">
-                            <small style="color: var(--texto-suave); text-transform: uppercase;">${gp.circuit || ''}</small>
-                            <h3 style="font-size: 22px; margin-bottom: 15px;">${gp.name}</h3>
-                            ${htmlSessoes}
-                        </div>
-                    `;
-                    grelhaCorridas.appendChild(cartao);
-                });
+var im = new Image();
+im.onload = function(){ D.body.classList.add("tem-foto"); };
+im.src = "img/hero.jpg";
 
-                if (proximaSessao) {
-                    document.getElementById('tituloProximo').textContent = proximaSessao.nome;
-                    document.getElementById('subtituloProximo').textContent = proximaSessao.data.toLocaleDateString('pt-PT', {
-                        weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit'
-                    }) + ' (Hora de Lisboa)';
+Promise.all([json("data/weekends.json", null), json("data/news.json", []), json("data/equipas.json", [])]).then(function(r){
+  if (!r[0]) {
+    $("next-title").textContent = "Não foi possível carregar os dados";
+    $("next-sub").textContent = "Abre o site através de um servidor (ver README).";
+    return;
+  }
+  init(r[0], r[1], r[2]);
+});
 
-                    setInterval(() => {
-                        const diff = proximaSessao.data - new Date();
-                        if (diff <= 0) return;
-                        document.getElementById('dias').textContent = String(Math.floor(diff / 86400000)).padStart(2, '0');
-                        document.getElementById('horas').textContent = String(Math.floor((diff / 3600000) % 24)).padStart(2, '0');
-                        document.getElementById('minutos').textContent = String(Math.floor((diff / 60000) % 60)).padStart(2, '0');
-                        document.getElementById('segundos').textContent = String(Math.floor((diff / 1000) % 60)).padStart(2, '0');
-                    }, 1000);
-                }
-            } catch (e) { console.error(e); }
+function code(n){
+  var m = n.match(/Treino Livre (\d)/);
+  if (m) return "TL" + m[1];
+  if (n === "Qualificação") return "Q";
+  if (n === "Qualificação Sprint") return "SQ";
+  if (n === "Sprint") return "SPR";
+  return "GP";
+}
 
-            // 2. Carregar Notícias
-            try {
-                const resN = await fetch('data/news.json');
-                const dadosN = await resN.json();
-                const listaN = Array.isArray(dadosN) ? dadosN : (dadosN.items || dadosN.articles || []);
-                const grelhaNoticias = document.getElementById('grelhaNoticias');
+function init(WEEKENDS, NEWS, TEAMS){
+  TEAMS.forEach(function(e){ if (e.favorita && HEX.test(e.cor)) D.documentElement.style.setProperty("--team", e.cor); });
 
-                listaN.slice(0, 6).forEach(n => {
-                    const cartao = document.createElement('article');
-                    cartao.className = 'cartao';
-                    const img = n.image || 'https://unsplash.com';
-                    cartao.innerHTML = `
-                        <img src="${img}" alt="F1" class="foto-piloto">
-                        <div class="cartao-corpo">
-                            <small style="color: var(--vermelho-f1); font-weight: bold;">${n.source || 'F1 NEWS'}</small>
-                            <h3 style="margin: 8px 0 12px; font-size: 19px;">${n.title}</h3>
-                            <a href="${n.link || n.url}" target="_blank" style="color: white; font-weight: bold; text-decoration: none;">Ler artigo completo →</a>
-                        </div>
-                    `;
-                    grelhaNoticias.appendChild(cartao);
-                });
-            } catch (e) { console.error(e); }
-        }
-        iniciarPortal();
-    </script>
+  var all = [], box = $("weekends");
+  WEEKENDS.forEach(function(w){
+    var card = el("div", "gp"), head = el("div", "gp-head"), left = el("div");
+    left.appendChild(el("h3", "disp", w.gp));
+    head.appendChild(left);
+    head.appendChild(el("span", null, w.circuit + " · " + w.dates));
+    card.appendChild(head);
+    w.sessions.forEach(function(s){
+      var row = el("div", "row" + (s.race ? " race" : ""));
+      row.appendChild(el("div", "cd", code(s.n)));
+      var nm = el("div", "nm", s.n);
+      if (s.v) nm.appendChild(el("span", "tag", "a confirmar"));
+      var pill = el("span", "pill"); nm.appendChild(pill);
+      row.appendChild(nm);
+      var when = el("div", "when");
+      when.appendChild(el("b", null, s.t ? fHour.format(new Date(s.t)) : "—"));
+      when.appendChild(el("span", null, s.t ? fShort.format(new Date(s.t)) : "hora a confirmar"));
+      row.appendChild(when);
+      card.appendChild(row);
+      all.push({ gp: w.gp, n: s.n, start: s.t ? Date.parse(s.t) : null, end: s.t ? Date.parse(s.t) + s.d * 60000 : null, race: !!s.race, row: row, pill: pill });
+    });
+    box.appendChild(card);
+  });
+
+  var tb = $("teams");
+  TEAMS.forEach(function(e, i){
+    var c = el("div", "team");
+    c.style.setProperty("--c", HEX.test(e.cor) ? e.cor : "#888");
+    if (/^[a-z0-9-]+$/.test(e.slug || "")) { var img = el("div", "img"); img.style.backgroundImage = "url(img/equipas/" + e.slug + ".jpg)"; c.appendChild(img); }
+    c.appendChild(el("div", "n", String(i + 1).padStart(2, "0")));
+    c.appendChild(el("div", "t", e.nome));
+    tb.appendChild(c);
+  });
+
+  var nl = $("news");
+  NEWS.forEach(function(n){
+    if (!/^https:\/\//.test(n.u)) return;
+    var li = el("li"), a = el("a");
+    a.href = n.u; a.target = "_blank"; a.rel = "noopener";
+    a.appendChild(el("span", "tt", n.t));
+    a.appendChild(el("span", "src", n.s + " ↗"));
+    li.appendChild(a); nl.appendChild(li);
+  });
+
+  var count = $("count");
+  function cell(v, l){ var c = el("div", "cell"); c.appendChild(el("b", null, String(v).padStart(2, "0"))); c.appendChild(el("span", null, l)); return c; }
+
+  function tick(){
+    var now = Date.now(), next = null, live = null;
+    all.forEach(function(s){
+      if (!s.start) { s.st = ""; return; }
+      s.st = now >= s.end ? "past" : now >= s.start ? "live" : "";
+      if (s.st === "live") live = s; else if (!s.st && !next) next = s;
+    });
+    all.forEach(function(s){
+      var cls = "row" + (s.race ? " race" : "");
+      if (s.st === "past") cls += " past";
+      if (s === live) cls += " live"; else if (s === next) cls += " next";
+      s.row.className = cls;
+      s.pill.textContent = s === live ? "Em pista" : s === next ? "A seguir" : "";
+    });
+    count.textContent = "";
+    if (live) {
+      $("kicker").textContent = "Agora";
+      $("next-title").textContent = live.n;
+      $("next-gp").textContent = live.gp;
+      $("next-sub").textContent = "";
+      count.appendChild(el("span", "livebadge", "Em pista agora"));
+    } else if (next) {
+      var ms = next.start - now;
+      $("kicker").textContent = "Próxima sessão";
+      $("next-title").textContent = next.n;
+      $("next-gp").textContent = next.gp;
+      $("next-sub").textContent = cap(fLong.format(new Date(next.start))) + ", às " + fHour.format(new Date(next.start)) + " (hora de Lisboa)";
+      count.appendChild(cell(Math.floor(ms / 864e5), "dias"));
+      count.appendChild(cell(Math.floor(ms % 864e5 / 36e5), "horas"));
+      count.appendChild(cell(Math.floor(ms % 36e5 / 6e4), "minutos"));
+      count.appendChild(cell(Math.floor(ms % 6e4 / 1e3), "segundos"));
+    } else {
+      $("kicker").textContent = "Época 2026";
+      $("next-title").textContent = "Sem sessões marcadas";
+      $("next-gp").textContent = "";
+      $("next-sub").textContent = "Volta quando houver novas sessões no calendário.";
+    }
+  }
+  tick(); setInterval(tick, 1000);
+}
+</script>
 </body>
 </html>
-
