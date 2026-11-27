@@ -42,7 +42,7 @@ window.EQUIPAS = [
     motor: "Ferrari", sede: "Kannapolis, Carolina do Norte, EUA", chefe: "Ayao Komatsu",
     titulos: 0, vitorias: null, poles: null,
     historia: "Fundada por Gene Haas, estreou-se na F1 em 2016 e foi a primeira equipa americana na categoria em décadas.",
-    pilotos: ["Esteban Ocon", "Oliver Bearman"]
+    pilotos: ["Rafael Câmara", "Oliver Bearman"]
   },
   {
     nome: "McLaren", slug: "mclaren", cor: "#FF8000", apiId: "mclaren",
