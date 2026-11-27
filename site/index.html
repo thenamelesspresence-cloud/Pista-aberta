@@ -85,7 +85,7 @@ section{padding:62px 0 8px}
 
 /* equipas */
 .teams{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}
-.team{position:relative;overflow:hidden;min-height:150px;background:var(--panel);border:1px solid var(--line);padding:16px 16px 14px;display:flex;flex-direction:column;justify-content:flex-end;transition:transform .2s,border-color .2s}
+.team{position:relative;overflow:hidden;min-height:150px;background:var(--panel);border:1px solid var(--line);padding:16px 16px 14px;display:flex;flex-direction:column;justify-content:flex-end;color:var(--ink);text-decoration:none;transition:transform .2s,border-color .2s}
 .team::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--c)}
 .team .img{position:absolute;inset:0;background-size:cover;background-position:center;opacity:.5}
 .team .img::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,var(--panel) 12%,rgba(20,24,29,.1))}
@@ -117,7 +117,7 @@ footer{margin-top:70px;padding:26px 0 40px;border-top:1px solid var(--line);colo
   <ul>
     <li><a class="l" href="#proxima">Próxima</a></li>
     <li><a class="l" href="#calendario">Calendário</a></li>
-    <li><a class="l" href="#equipas">Equipas</a></li>
+    <li><a class="l" href="equipas.html">Equipas</a></li>
     <li><a class="l" href="#noticias">Notícias</a></li>
   </ul>
 </div></header>
@@ -243,7 +243,8 @@ function init(WEEKENDS, NEWS, TEAMS){
 
   var tb = $("teams");
   TEAMS.forEach(function(e, i){
-    var c = el("div", "team");
+    var c = el("a", "team");
+    if (/^[a-z0-9-]+$/.test(e.slug || "")) c.href = "equipa.html?equipa=" + e.slug;
     c.style.setProperty("--c", HEX.test(e.cor) ? e.cor : "#888");
     if (/^[a-z0-9-]+$/.test(e.slug || "")) { var img = el("div", "img"); img.style.backgroundImage = "url(img/equipas/" + e.slug + ".jpg)"; c.appendChild(img); }
     c.appendChild(el("div", "n", String(i + 1).padStart(2, "0")));
