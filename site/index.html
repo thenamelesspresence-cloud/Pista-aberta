@@ -70,6 +70,7 @@ section{padding:62px 0 8px}
 .row{display:grid;grid-template-columns:62px 1fr auto;align-items:center;gap:16px;padding:13px 22px 13px 0;border-bottom:1px solid var(--line)}
 .row:last-child{border-bottom:0}
 .cd{justify-self:stretch;align-self:stretch;display:flex;align-items:center;justify-content:center;margin:-13px 0;font-weight:800;font-style:italic;font-stretch:125%;font-size:15px;background:var(--panel2);color:var(--muted)}
+.cd.long{font-size:11px;letter-spacing:.02em}
 .row.race .cd{background:var(--team);color:#fff}
 .nm{font-weight:600}
 .tag{margin-left:8px;font-size:11px;border:1px solid var(--line);padding:1px 7px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;white-space:nowrap}
@@ -205,10 +206,10 @@ Promise.all([json("data/weekends.json", null), json("data/news.json", []), json(
 
 function code(n){
   var m = n.match(/Treino Livre (\d)/);
-  if (m) return "TL" + m[1];
+  if (m) return "FP" + m[1];
   if (n === "Qualificação") return "Q";
   if (n === "Qualificação Sprint") return "SQ";
-  if (n === "Sprint") return "SPR";
+  if (n === "Sprint") return "SPRINT";
   return "GP";
 }
 
@@ -224,7 +225,8 @@ function init(WEEKENDS, NEWS, TEAMS){
     card.appendChild(head);
     w.sessions.forEach(function(s){
       var row = el("div", "row" + (s.race ? " race" : ""));
-      row.appendChild(el("div", "cd", code(s.n)));
+      var cc = code(s.n);
+      row.appendChild(el("div", "cd" + (cc.length > 3 ? " long" : ""), cc));
       var nm = el("div", "nm", s.n);
       if (s.v) nm.appendChild(el("span", "tag", "a confirmar"));
       var pill = el("span", "pill"); nm.appendChild(pill);
