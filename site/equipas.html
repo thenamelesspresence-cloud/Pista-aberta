@@ -1,47 +1,44 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-PT">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Equipas · Pista Aberta</title>
-  <!-- Usa aqui a mesma fonte e <link> de estilos da tua página principal -->
-  <link rel="stylesheet" href="equipas.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Equipas · Pista Aberta</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&display=swap">
+<link rel="stylesheet" href="equipas.css">
 </head>
 <body>
-  <header class="topbar">
-    <div class="wrap">
-      <a class="logo" href="index.html">PISTA ABERTA</a>
-      <nav>
-        <a href="index.html#proxima">Próxima</a>
-        <a href="index.html#calendario">Calendário</a>
-        <a class="ativo" href="equipas.html">Equipas</a>
-        <a href="index.html#noticias">Notícias</a>
-      </nav>
-    </div>
-  </header>
+<header class="nav"><div class="wrap">
+  <a class="logo disp" href="index.html#proxima"><i></i>Pista Aberta</a>
+  <ul>
+    <li><a class="l" href="index.html#proxima">Próxima</a></li>
+    <li><a class="l" href="index.html#calendario">Calendário</a></li>
+    <li><a class="l ativo" href="equipas.html">Equipas</a></li>
+    <li><a class="l" href="index.html#noticias">Notícias</a></li>
+  </ul>
+</div></header>
 
-  <main class="wrap">
-    <div class="page-head">
-      <h1>Equipas</h1>
-      <small>A grelha de 2026 · 11 equipas</small>
-    </div>
-    <div class="grid-equipas" id="grelha"></div>
-  </main>
+<main class="wrap">
+  <div class="page-head">
+    <h1>Equipas</h1>
+    <small>A grelha de 2026 · 11 equipas</small>
+  </div>
+  <div class="grid-equipas" id="grelha"></div>
+</main>
 
-  <footer class="rodape"><div class="wrap">Site não oficial, sem ligação à Fórmula 1 nem às equipas. Os nomes e as marcas pertencem aos respetivos proprietários.</div></footer>
+<footer class="rodape"><div class="wrap">Site não oficial, sem ligação à Fórmula 1 nem às equipas. Os nomes e as marcas pertencem aos respetivos proprietários.</div></footer>
 
-  <script src="equipas-data.js"></script>
-  <script>
-    const iniciais = n => n.split(" ").map(p => p[0]).join("").slice(0, 2).toUpperCase();
-    document.getElementById("grelha").innerHTML = EQUIPAS.map(t => `
-      <a class="card-equipa" href="equipa.html?equipa=${t.slug}" style="--team:${t.cor}">
-        <div class="logo-box">
-          <img src="img/equipas/${t.slug}.svg" alt="Logótipo ${t.nome}"
-               onerror="this.replaceWith(document.createTextNode('${iniciais(t.nome)}'))">
-        </div>
-        <h2>${t.nome}</h2>
-        <span class="ver">Ver equipa →</span>
-      </a>`).join("");
-  </script>
+<script src="equipas-data.js"></script>
+<script>
+  var iniciais = function (n) { return n.split(" ").map(function (p) { return p[0]; }).join("").slice(0, 2).toUpperCase(); };
+  document.getElementById("grelha").innerHTML = EQUIPAS.map(function (t) {
+    return '<a class="card-equipa" href="equipa.html?equipa=' + t.slug + '" style="--team:' + t.cor + '">' +
+      '<div class="logo-box"><img src="img/logos/' + t.slug + '.svg" alt="Logótipo ' + t.nome + '" ' +
+      'onerror="this.replaceWith(document.createTextNode(\'' + iniciais(t.nome) + '\'))"></div>' +
+      '<h2>' + t.nome + '</h2><span class="ver">Ver equipa →</span></a>';
+  }).join("");
+</script>
 </body>
 </html>
