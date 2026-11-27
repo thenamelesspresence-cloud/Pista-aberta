@@ -7,7 +7,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&display=swap">
-<link rel="stylesheet" href="equipas.css">
+<style>
+/* cores base: garantem o fundo escuro mesmo que o equipas.css falhe ou esteja em cache */
+:root{--team:#E10600;--bg:#0B0D10;--panel:#14181D;--panel2:#1B2128;--ink:#F2F4F6;--muted:#9AA4AE;--line:#262E36;color-scheme:dark}
+html,body{background:#0B0D10;color:#F2F4F6}
+</style>
+<link rel="stylesheet" href="equipas.css?v=4">
 </head>
 <body class="pag-equipa">
 <header class="nav"><div class="wrap">
@@ -38,7 +43,7 @@
 
 <footer class="rodape"><div class="wrap">Site não oficial, sem ligação à Fórmula 1 nem às equipas. Dados de resultados: API Jolpica (Ergast).</div></footer>
 
-<script src="equipas-data.js"></script>
-<script src="equipa.js"></script>
+<script src="equipas-data.js?v=5"></script>
+<script src="equipa.js?v=4"></script>
 </body>
 </html>

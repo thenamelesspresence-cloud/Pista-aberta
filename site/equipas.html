@@ -7,7 +7,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&display=swap">
-<link rel="stylesheet" href="equipas.css">
+<style>
+/* cores base: garantem o fundo escuro mesmo que o equipas.css falhe ou esteja em cache */
+:root{--team:#E10600;--bg:#0B0D10;--panel:#14181D;--panel2:#1B2128;--ink:#F2F4F6;--muted:#9AA4AE;--line:#262E36;color-scheme:dark}
+html,body{background:#0B0D10;color:#F2F4F6}
+</style>
+<link rel="stylesheet" href="equipas.css?v=4">
 </head>
 <body>
 <header class="nav"><div class="wrap">
@@ -30,15 +35,32 @@
 
 <footer class="rodape"><div class="wrap">Site não oficial, sem ligação à Fórmula 1 nem às equipas. Os nomes e as marcas pertencem aos respetivos proprietários.</div></footer>
 
-<script src="equipas-data.js"></script>
+<script src="equipas-data.js?v=5"></script>
 <script>
-  var iniciais = function (n) { return n.split(" ").map(function (p) { return p[0]; }).join("").slice(0, 2).toUpperCase(); };
-  document.getElementById("grelha").innerHTML = EQUIPAS.map(function (t) {
-    return '<a class="card-equipa" href="equipa.html?equipa=' + t.slug + '" style="--team:' + t.cor + '">' +
-      '<div class="logo-box"><img src="img/logos/' + t.slug + '.svg" alt="Logótipo ' + t.nome + '" ' +
-      'onerror="this.replaceWith(document.createTextNode(\'' + iniciais(t.nome) + '\'))"></div>' +
-      '<h2>' + t.nome + '</h2><span class="ver">Ver equipa →</span></a>';
-  }).join("");
+  var grelha = document.getElementById("grelha");
+  EQUIPAS.forEach(function (t) {
+    var card = document.createElement("a");
+    card.className = "card-equipa";
+    card.href = "equipa.html?equipa=" + t.slug;
+    card.style.setProperty("--team", t.cor);
+
+    var box = document.createElement("div");
+    box.className = "logo-box";
+
+    var nome = document.createElement("h2");
+    nome.textContent = t.nome;
+
+    var ver = document.createElement("span");
+    ver.className = "ver";
+    ver.textContent = "Ver equipa →";
+
+    card.appendChild(box);
+    card.appendChild(nome);
+    card.appendChild(ver);
+    grelha.appendChild(card);
+
+    montarLogo(box, t.slug, t.nome);
+  });
 </script>
 </body>
 </html>

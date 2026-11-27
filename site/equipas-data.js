@@ -83,17 +83,64 @@ window.EQUIPAS = [
 
 // Mostra o logótipo da equipa dentro de "box".
 // Procura img/logos/<slug>.svg, depois .png, .webp e .jpg. Se não houver nenhum, mostra as iniciais.
+// Corta automaticamente o espaço vazio (transparente ou branco) à volta do desenho,
+// para o logótipo ocupar o quadrado todo.
+window.aparaLogo = function (img) {
+  try {
+    var w = img.naturalWidth, h = img.naturalHeight;
+    if (!w || !h) return null;
+    var k = 400 / Math.max(w, h);
+    var cw = Math.round(w * k), ch = Math.round(h * k);
+    var c = document.createElement("canvas");
+    c.width = cw; c.height = ch;
+    var ctx = c.getContext("2d");
+    ctx.drawImage(img, 0, 0, cw, ch);
+    var d = ctx.getImageData(0, 0, cw, ch).data;
+    var minX = cw, minY = ch, maxX = -1, maxY = -1;
+    for (var y = 0; y < ch; y++) {
+      for (var x = 0; x < cw; x++) {
+        var p = (y * cw + x) * 4;
+        var vazio = d[p + 3] < 20 || (d[p] > 245 && d[p + 1] > 245 && d[p + 2] > 245);
+        if (!vazio) {
+          if (x < minX) minX = x;
+          if (x > maxX) maxX = x;
+          if (y < minY) minY = y;
+          if (y > maxY) maxY = y;
+        }
+      }
+    }
+    if (maxX < 0) return null;
+    var tw = maxX - minX + 1, th = maxY - minY + 1;
+    var o = document.createElement("canvas");
+    o.width = tw; o.height = th;
+    o.getContext("2d").drawImage(c, minX, minY, tw, th, 0, 0, tw, th);
+    return o.toDataURL("image/png");
+  } catch (e) {
+    return null; // se algo falhar, usa a imagem original
+  }
+};
+
 window.montarLogo = function (box, slug, nome) {
-  var exts = ["svg", "png", "webp", "jpg"], i = 0;
+  var exts = ["svg", "png", "webp", "jpg"], i = 0, V = "?v=3";
   var ini = nome.split(" ").map(function (p) { return p[0]; }).join("").slice(0, 2).toUpperCase();
   var img = new Image();
   img.alt = "Logótipo " + nome;
-  img.onload = function () { box.textContent = ""; box.classList.add("com-img"); box.appendChild(img); };
+  img.onload = function () {
+    var url = window.aparaLogo(img);
+    var out = img;
+    if (url) { out = new Image(); out.alt = img.alt; out.src = url; }
+    out.style.cssText = "width:100%;height:100%;object-fit:contain;display:block";
+    box.textContent = "";
+    box.style.border = "0";
+    box.style.background = "#fff";
+    box.style.padding = "6px";
+    box.appendChild(out);
+  };
   img.onerror = function () {
     console.warn("Logótipo não encontrado: " + img.src);
     i++;
-    if (i < exts.length) img.src = "img/logos/" + slug + "." + exts[i] + "?v=2";
+    if (i < exts.length) img.src = "img/logos/" + slug + "." + exts[i] + V;
   };
   box.textContent = ini;
-  img.src = "img/logos/" + slug + "." + exts[0] + "?v=2";
+  img.src = "img/logos/" + slug + "." + exts[0] + V;
 };
