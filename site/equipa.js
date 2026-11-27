@@ -34,9 +34,14 @@ if (!t) {
 }
 
 async function pedir(url) {
-  const r = await fetch(url);
-  if (!r.ok) throw new Error(r.status);
-  return (await r.json()).MRData;
+  // tenta até 3 vezes se a API estiver ocupada (erro 429)
+  for (let i = 0; i < 3; i++) {
+    const r = await fetch(url);
+    if (r.status === 429) { await new Promise(s => setTimeout(s, 1200 * (i + 1))); continue; }
+    if (!r.ok) throw new Error("erro " + r.status + " em " + url);
+    return (await r.json()).MRData;
+  }
+  throw new Error("a API está ocupada, tenta daqui a pouco");
 }
 
 async function carregarDados() {
@@ -111,9 +116,8 @@ async function carregarDados() {
       ${linha("Pontos totais", A.pontos, B.pontos)}
       <div class="nota">Época ${EPOCA}. Em cada sessão ganha quem terminou à frente do companheiro de equipa (só conta quando ambos participaram).</div>`;
   } catch (e) {
-    $("h2h").innerHTML = '<p class="erro">Ainda não há dados desta equipa na API (ou não foi possível carregar). Confirma o <code>apiId</code> em equipas-data.js.</p>';
+    console.error(e);
+    $("h2h").innerHTML = '<p class="erro">Não foi possível carregar os resultados (' + esc(e.message) + '). Se o problema persistir, confirma o <code>apiId</code> desta equipa em equipas-data.js.</p>';
     $("pilotos").innerHTML = t.pilotos.map(n => `<div class="piloto"><h3>${esc(n)}</h3><div class="sub">Resultados indisponíveis</div></div>`).join("");
   }
-}
-
 }
