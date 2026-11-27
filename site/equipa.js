@@ -18,7 +18,7 @@ if (!t) {
   document.documentElement.style.setProperty("--team", t.cor);
   document.title = `${t.nome} · Pista Aberta`;
   $("nome").textContent = t.nome;
-  $("logo").innerHTML = `<img src="img/equipas/${esc(t.slug)}.svg" alt="Logótipo ${esc(t.nome)}"
+  $("logo").innerHTML = `<img src="img/logos/${esc(t.slug)}.svg" alt="Logótipo ${esc(t.nome)}"
       onerror="this.replaceWith(document.createTextNode('${iniciais(t.nome)}'))">`;
   $("historia").textContent = t.historia;
 
@@ -114,4 +114,6 @@ async function carregarDados() {
     $("h2h").innerHTML = '<p class="erro">Ainda não há dados desta equipa na API (ou não foi possível carregar). Confirma o <code>apiId</code> em equipas-data.js.</p>';
     $("pilotos").innerHTML = t.pilotos.map(n => `<div class="piloto"><h3>${esc(n)}</h3><div class="sub">Resultados indisponíveis</div></div>`).join("");
   }
+}
+
 }
