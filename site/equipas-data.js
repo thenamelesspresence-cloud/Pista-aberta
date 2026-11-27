@@ -80,3 +80,20 @@ window.EQUIPAS = [
     pilotos: ["Alexander Albon", "Carlos Sainz"]
   }
 ];
+
+// Mostra o logótipo da equipa dentro de "box".
+// Procura img/logos/<slug>.svg, depois .png, .webp e .jpg. Se não houver nenhum, mostra as iniciais.
+window.montarLogo = function (box, slug, nome) {
+  var exts = ["svg", "png", "webp", "jpg"], i = 0;
+  var ini = nome.split(" ").map(function (p) { return p[0]; }).join("").slice(0, 2).toUpperCase();
+  var img = new Image();
+  img.alt = "Logótipo " + nome;
+  img.onload = function () { box.textContent = ""; box.classList.add("com-img"); box.appendChild(img); };
+  img.onerror = function () {
+    console.warn("Logótipo não encontrado: " + img.src);
+    i++;
+    if (i < exts.length) img.src = "img/logos/" + slug + "." + exts[i] + "?v=2";
+  };
+  box.textContent = ini;
+  img.src = "img/logos/" + slug + "." + exts[0] + "?v=2";
+};
