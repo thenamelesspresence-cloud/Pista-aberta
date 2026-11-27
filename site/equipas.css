@@ -41,9 +41,9 @@ a { color: inherit; text-decoration: none; }
   width: 84px; height: 84px; display: grid; place-items: center; border: 1px dashed var(--team);
   background: rgba(255,255,255,.04); color: var(--team); font-weight: 900; font-style: italic; font-stretch: 125%; font-size: 28px;
 }
-.logo-box img { max-width: 82%; max-height: 82%; object-fit: contain; }
+.logo-box img { width: 100%; height: 100%; object-fit: contain; display: block; }
 /* quando há logótipo a sério, tira o tracejado e o texto das iniciais */
-.logo-box.com-img { border: 0; background: #fff; padding: 8px; }
+.logo-box.com-img { border: 0; background: #fff; padding: 6px; }
 .card-equipa .ver { font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
 
 /* ---------- página da equipa: tudo tingido com a cor da equipa ---------- */
