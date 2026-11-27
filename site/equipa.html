@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Equipa · Pista Aberta</title>
+  <!-- Usa aqui a mesma fonte e <link> de estilos da tua página principal -->
+  <link rel="stylesheet" href="equipas.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap">
+      <a class="logo" href="index.html">PISTA ABERTA</a>
+      <nav>
+        <a href="index.html#proxima">Próxima</a>
+        <a href="index.html#calendario">Calendário</a>
+        <a class="ativo" href="equipas.html">Equipas</a>
+        <a href="index.html#noticias">Notícias</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="hero-equipa">
+    <div class="wrap">
+      <div class="logo-box" id="logo"></div>
+      <h1 id="nome"></h1>
+    </div>
+  </div>
+
+  <main class="wrap">
+    <a class="voltar" href="equipas.html">← Todas as equipas</a>
+
+    <section class="bloco"><h2>Cartão de identidade</h2><div class="identidade" id="identidade"></div></section>
+    <section class="bloco"><h2>História</h2><div class="painel"><p id="historia"></p></div></section>
+    <section class="bloco"><h2>Pilotos e últimas corridas</h2><div class="pilotos" id="pilotos"></div></section>
+    <section class="bloco"><h2>Confronto direto</h2><div class="painel" id="h2h"><p>A carregar…</p></div></section>
+  </main>
+
+  <footer class="rodape"><div class="wrap">Site não oficial, sem ligação à Fórmula 1 nem às equipas. Dados de resultados: API Jolpica (Ergast).</div></footer>
+
+  <script src="equipas-data.js"></script>
+  <script src="equipa.js"></script>
+</body>
+</html>
