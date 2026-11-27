@@ -120,7 +120,9 @@ window.aparaLogo = function (img) {
   }
 };
 
-window.montarLogo = function (box, slug, nome) {
+window.montarLogo = function (box, slug, nome, opts) {
+  opts = opts || {};
+  var pad = opts.pad == null ? 6 : opts.pad;
   var exts = ["svg", "png", "webp", "jpg"], i = 0, V = "?v=3";
   var ini = nome.split(" ").map(function (p) { return p[0]; }).join("").slice(0, 2).toUpperCase();
   var img = new Image();
@@ -129,11 +131,12 @@ window.montarLogo = function (box, slug, nome) {
     var url = window.aparaLogo(img);
     var out = img;
     if (url) { out = new Image(); out.alt = img.alt; out.src = url; }
-    out.style.cssText = "width:100%;height:100%;object-fit:contain;display:block";
+    out.style.cssText = "position:absolute;top:" + pad + "px;left:" + pad + "px;width:calc(100% - " + (2 * pad) + "px);height:calc(100% - " + (2 * pad) + "px);object-fit:contain;display:block";
     box.textContent = "";
+    if (getComputedStyle(box).position === "static") box.style.position = "relative";
     box.style.border = "0";
-    box.style.background = "#fff";
-    box.style.padding = "6px";
+    box.style.background = opts.bg || "#fff";
+    box.style.padding = "0";
     box.appendChild(out);
   };
   img.onerror = function () {

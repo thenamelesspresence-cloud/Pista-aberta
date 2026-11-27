@@ -27,24 +27,44 @@ a { color: inherit; text-decoration: none; }
 .page-head h1 { font-size: clamp(28px, 5vw, 44px); }
 .page-head small { color: var(--muted); font-size: 14px; }
 
-/* grelha de equipas */
-.grid-equipas { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 14px; padding-bottom: 64px; }
-.card-equipa {
-  position: relative; display: flex; flex-direction: column; gap: 18px; padding: 20px 20px 20px 26px; overflow: hidden;
-  background: linear-gradient(135deg, color-mix(in srgb, var(--team) 22%, var(--panel)), var(--panel) 65%);
-  border: 1px solid var(--line); transition: transform .2s, border-color .2s;
-}
-.card-equipa::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 6px; background: var(--team); }
-.card-equipa:hover { transform: translateY(-4px); border-color: var(--team); }
-.card-equipa h2 { font-size: 20px; line-height: 1.1; }
+/* ---------- lista de equipas: blocos de cor ---------- */
 .logo-box {
   width: 84px; height: 84px; display: grid; place-items: center; border: 1px dashed var(--team);
   background: rgba(255,255,255,.04); color: var(--team); font-weight: 900; font-style: italic; font-stretch: 125%; font-size: 28px;
 }
-.logo-box img { width: 100%; height: 100%; object-fit: contain; display: block; }
-/* quando há logótipo a sério, tira o tracejado e o texto das iniciais */
-.logo-box.com-img { border: 0; background: #fff; padding: 6px; }
-.card-equipa .ver { font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.page-head { padding-bottom: 20px; }
+.livery { display: flex; height: 6px; margin-bottom: 28px; }
+.livery i { flex: 1; }
+
+.tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; padding-bottom: 70px; }
+.tile {
+  position: relative; display: flex; align-items: flex-end; min-height: 240px; padding: 24px; overflow: hidden;
+  color: var(--on, #fff);
+  background: linear-gradient(135deg, var(--team), color-mix(in srgb, var(--team) 76%, #000));
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 26px), calc(100% - 26px) 100%, 0 100%);
+  transition: transform .2s;
+}
+.tile::before {            /* faixa diagonal escura */
+  content: ""; position: absolute; top: 0; bottom: 0; right: 0; width: 56%; background: rgba(0,0,0,.14);
+  clip-path: polygon(38% 0, 100% 0, 100% 100%, 0 100%); transition: width .3s; pointer-events: none;
+}
+.tile::after {             /* riscas finas, como no topo do site */
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: repeating-linear-gradient(45deg, rgba(255,255,255,.07) 0 2px, transparent 2px 8px);
+}
+.tile:hover { transform: translateY(-5px); }
+.tile:hover::before { width: 74%; }
+.tile:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+.tile-info { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.tile-engine { font-size: 14px; font-weight: 600; opacity: .8; }
+.tile-name { font-size: clamp(28px, 3.4vw, 38px); line-height: .95; overflow-wrap: anywhere; }
+.tile-drivers { font-size: 16px; font-weight: 700; }
+.tile-plate {              /* placa branca do logótipo, colada ao canto */
+  position: absolute; top: 0; right: 0; z-index: 1; width: 150px; height: 98px; background: #fff; color: #0B0D10;
+  display: grid; place-items: center; font-weight: 900; font-style: italic; font-stretch: 125%; font-size: 30px;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 24px 100%, 0 calc(100% - 24px));
+}
+@media (max-width: 420px) { .tile { min-height: 210px; padding: 20px; } .tile-plate { width: 120px; height: 80px; } }
 
 /* ---------- página da equipa: tudo tingido com a cor da equipa ---------- */
 body.pag-equipa {

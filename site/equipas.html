@@ -12,7 +12,7 @@
 :root{--team:#E10600;--bg:#0B0D10;--panel:#14181D;--panel2:#1B2128;--ink:#F2F4F6;--muted:#9AA4AE;--line:#262E36;color-scheme:dark}
 html,body{background:#0B0D10;color:#F2F4F6}
 </style>
-<link rel="stylesheet" href="equipas.css?v=4">
+<link rel="stylesheet" href="equipas.css?v=6">
 </head>
 <body>
 <header class="nav"><div class="wrap">
@@ -28,38 +28,56 @@ html,body{background:#0B0D10;color:#F2F4F6}
 <main class="wrap">
   <div class="page-head">
     <h1>Equipas</h1>
-    <small>A grelha de 2026 · 11 equipas</small>
+    <small>11 equipas, 22 pilotos na grelha de 2026</small>
   </div>
-  <div class="grid-equipas" id="grelha"></div>
+  <div class="livery" id="livery" aria-hidden="true"></div>
+  <div class="tiles" id="grelha"></div>
 </main>
 
 <footer class="rodape"><div class="wrap">Site não oficial, sem ligação à Fórmula 1 nem às equipas. Os nomes e as marcas pertencem aos respetivos proprietários.</div></footer>
 
-<script src="equipas-data.js?v=5"></script>
+<script src="equipas-data.js?v=6"></script>
 <script>
+  // luminosidade da cor: decide se o texto sobre o bloco é escuro ou branco
+  function luminancia(hex) {
+    var n = parseInt(hex.slice(1), 16);
+    var c = [(n >> 16) & 255, (n >> 8) & 255, n & 255].map(function (v) {
+      v /= 255;
+      return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+    });
+    return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
+  }
+  function el(tag, cls, txt) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (txt != null) e.textContent = txt;
+    return e;
+  }
+
   var grelha = document.getElementById("grelha");
+  var faixa = document.getElementById("livery");
+
   EQUIPAS.forEach(function (t) {
-    var card = document.createElement("a");
-    card.className = "card-equipa";
-    card.href = "equipa.html?equipa=" + t.slug;
-    card.style.setProperty("--team", t.cor);
+    var seg = document.createElement("i");
+    seg.style.background = t.cor;
+    faixa.appendChild(seg);
 
-    var box = document.createElement("div");
-    box.className = "logo-box";
+    var tile = el("a", "tile");
+    tile.href = "equipa.html?equipa=" + t.slug;
+    tile.style.setProperty("--team", t.cor);
+    tile.style.setProperty("--on", luminancia(t.cor) > 0.19 ? "#0B0D10" : "#FFFFFF");
 
-    var nome = document.createElement("h2");
-    nome.textContent = t.nome;
+    var placa = el("div", "tile-plate");
+    var info = el("div", "tile-info");
+    info.appendChild(el("span", "tile-engine", "Motor " + t.motor));
+    info.appendChild(el("h2", "tile-name", t.nome));
+    info.appendChild(el("span", "tile-drivers", t.pilotos.map(function (p) { return p.split(" ").pop(); }).join(" e ")));
 
-    var ver = document.createElement("span");
-    ver.className = "ver";
-    ver.textContent = "Ver equipa →";
+    tile.appendChild(placa);
+    tile.appendChild(info);
+    grelha.appendChild(tile);
 
-    card.appendChild(box);
-    card.appendChild(nome);
-    card.appendChild(ver);
-    grelha.appendChild(card);
-
-    montarLogo(box, t.slug, t.nome);
+    montarLogo(placa, t.slug, t.nome, { pad: 14 });
   });
 </script>
 </body>
